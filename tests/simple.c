@@ -20,18 +20,6 @@
 #include <CUnit/Basic.h>
 #include <stdbool.h>
 
-            free( metadataPack );
-            free( encodedData );
-        } else {
-            printf( "Metada Encoding failed for append encode data\n " );
-            CU_ASSERT( false );
-        }
-    }
-
-    wrp_free_struct( finalMsg );
-    wrp_free_struct( message );
-}
-
 void add_suites( CU_pSuite *suite )
 {
     *suite = CU_add_suite( "tr181cli tests", NULL, NULL );
