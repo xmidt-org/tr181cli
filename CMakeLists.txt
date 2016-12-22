@@ -119,5 +119,5 @@ link_directories ( ${LIBRARY_DIR} ${LIBRARY_DIR64})
 
 add_subdirectory(src)
 if (BUILD_TESTING)
-    #add_subdirectory(tests)
+    add_subdirectory(tests)
 endif (BUILD_TESTING)
