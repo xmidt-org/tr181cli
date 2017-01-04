@@ -15,3 +15,23 @@ cmake ..
 make
 make test
 ```
+
+# Usage Instructions
+
+```
+Currently tr181cli is supporting GET queries.
+
+Sample command line GET query is as below:
+./tr181cli Get parameter1 parameter2
+e.g. --> ./tr181cli Get Device.DeviceInfo.ModelName Device.DeviceInfo.Manufacturer
+
+tr181cli works as:
+
+-tr181cli will accept the command line arguments with command and required parameter names
+-converts this request into wrp-c format 
+-wrp-c formatted request will be encoded using msgpack
+-sends this encoded request to webpa adapter through nanomsg
+-webpa adapter will process this requests to fetch the values from stack
+-tr181cli accepts the encoded response from adapter through nanomsg and displays the TR181 query result.
+```
+
