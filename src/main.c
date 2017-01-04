@@ -23,16 +23,19 @@
 #include <stdarg.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <string.h>
+#include <stdio.h>
 
+#include "tr181cli_interface.h"
 /*----------------------------------------------------------------------------*/
 /*                                   Macros                                   */
 /*----------------------------------------------------------------------------*/
-/* none */
+
 
 /*----------------------------------------------------------------------------*/
 /*                               Data Structures                              */
 /*----------------------------------------------------------------------------*/
-/* none */
+
 
 /*----------------------------------------------------------------------------*/
 /*                            File Scoped Variables                           */
@@ -42,21 +45,51 @@
 /*----------------------------------------------------------------------------*/
 /*                             Function Prototypes                            */
 /*----------------------------------------------------------------------------*/
-/* none */
 
 /*----------------------------------------------------------------------------*/
 /*                             External Functions                             */
 /*----------------------------------------------------------------------------*/
+
 int main( int argc, char *argv[] )
 {
-    if( 0 == argc || NULL == argv ) {
-        return -1;
-    }
+	char **paramList =NULL;
+	char *command;
+	REQ_TYPE type;	
+	int paramCount=0;
+	int i=0,j=2;		
 
-    return 0;
+	if( 0 == argc || NULL == argv ) 
+	{
+		return -1;
+	}
+
+	if( argc >= 2 ) 
+	{
+		printf("The request queried is %s\n", argv[1]);
+		command = argv[1];
+		
+		if (strcmp(command, "Get")==0)
+		{
+			printf("Received GET query\n");
+			type = GET;
+
+			paramCount = (argc-2);
+			paramList = (char**) malloc(sizeof(char*)*paramCount);
+			
+			for(i=0; i<paramCount; i++)
+			{
+				paramList[i] = (char*)malloc(sizeof(char)*256);
+				strcpy(paramList[i], argv[j]);
+				j++;
+			}
+		}
+		//Parse tr181 request by converting to wrp structure			
+		parseTr181Request(type, paramList,  paramCount);				
+	}
+	else 
+	{
+		printf("One argument is expected..\n");
+	}
+	return 0;
 }
 
-/*----------------------------------------------------------------------------*/
-/*                             Internal functions                             */
-/*----------------------------------------------------------------------------*/
-/* none */
