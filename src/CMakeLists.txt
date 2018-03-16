@@ -23,6 +23,7 @@ target_link_libraries (tr181cli
     -lm
     -lnanomsg
     -lcjson
+    -lcimplog
     -lpthread
     -lrt
     )
